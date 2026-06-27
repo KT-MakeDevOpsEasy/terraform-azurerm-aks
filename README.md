@@ -6,7 +6,7 @@ Generic, reusable Terraform module for provisioning a production-grade Azure Kub
 
 ```hcl
 module "aks" {
-  source = "git::https://github.com/<org>/terraform-azurerm-aks.git?ref=v1.0.0"
+  source = "git::https://github.com/KT-MakeDevOpsEasy/terraform-azurerm-aks.git?ref=v1.0.0"
 
   cluster_name        = "aks-myapp-dev-eus"
   resource_group_name = azurerm_resource_group.this.name
@@ -83,3 +83,10 @@ This module follows [Semantic Versioning](https://semver.org/). Pin to a specifi
 | node\_resource\_group | Node resource group name |
 
 <!-- END_TF_DOCS -->
+
+## Related Repos
+
+- [azure-challenges](https://github.com/KT-MakeDevOpsEasy/azure-challenges) — Deployment code using this module (Challenge 2)
+- [terraform-azurerm-vnet](https://github.com/KT-MakeDevOpsEasy/terraform-azurerm-vnet) — Reusable VNET module (used alongside this module)
+- [aks-platform-config](https://github.com/KT-MakeDevOpsEasy/aks-platform-config) — Gatekeeper + NGINX Ingress bootstrap (post-cluster)
+- [aks-app-deployment](https://github.com/KT-MakeDevOpsEasy/aks-app-deployment) — Helm umbrella chart deployed to the cluster
