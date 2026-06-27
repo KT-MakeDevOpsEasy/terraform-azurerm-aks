@@ -127,7 +127,7 @@ variable "log_analytics_workspace_id" {
 # --- Tags ---
 
 variable "tags" {
-  description = "Tags to apply to all resources"
+  description = "Tags to apply to all resources (ManagedBy=terraform is always added)"
   type        = map(string)
   default     = {}
 }

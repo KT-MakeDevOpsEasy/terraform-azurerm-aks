@@ -1,8 +1,16 @@
+locals {
+  required_tags = {
+    ManagedBy = "terraform"
+  }
+
+  merged_tags = merge(var.tags, local.required_tags)
+}
+
 resource "azurerm_user_assigned_identity" "aks" {
   name                = "id-${var.cluster_name}"
   resource_group_name = var.resource_group_name
   location            = var.location
-  tags                = var.tags
+  tags                = local.merged_tags
 }
 
 resource "azurerm_role_assignment" "aks_network" {
@@ -18,7 +26,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   dns_prefix          = var.dns_prefix
   kubernetes_version  = var.kubernetes_version
   sku_tier            = var.sku_tier
-  tags                = var.tags
+  tags                = local.merged_tags
 
   private_cluster_enabled = var.private_cluster_enabled
 
