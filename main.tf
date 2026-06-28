@@ -55,6 +55,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     zones                        = var.system_node_pool.zones
     only_critical_addons_enabled = true
 
+
     node_labels = {
       "nodepool-type" = "system"
     }
@@ -111,7 +112,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "user" {
   node_count            = each.value.auto_scaling_enabled ? null : each.value.node_count
   min_count             = each.value.auto_scaling_enabled ? each.value.min_count : null
   max_count             = each.value.auto_scaling_enabled ? each.value.max_count : null
-  auto_scaling_enabled   = each.value.auto_scaling_enabled
+  auto_scaling_enabled  = each.value.auto_scaling_enabled
   vnet_subnet_id        = var.node_subnet_id
   os_disk_size_gb       = each.value.os_disk_size_gb
   zones                 = each.value.zones
