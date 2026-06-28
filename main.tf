@@ -70,7 +70,9 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   azure_active_directory_role_based_access_control {
-    azure_rbac_enabled = true
+    azure_rbac_enabled     = true
+    tenant_id              = var.tenant_id
+    admin_group_object_ids = var.admin_group_object_ids
   }
 
   oidc_issuer_enabled       = var.workload_identity_enabled

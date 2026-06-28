@@ -111,6 +111,17 @@ variable "user_node_pools" {
 
 # --- Identity & RBAC ---
 
+variable "tenant_id" {
+  description = "Azure AD tenant ID for RBAC integration"
+  type        = string
+}
+
+variable "admin_group_object_ids" {
+  description = "List of Azure AD group object IDs with cluster admin access"
+  type        = list(string)
+  default     = []
+}
+
 variable "workload_identity_enabled" {
   description = "Enable workload identity (OIDC issuer + federated credentials)"
   type        = bool
