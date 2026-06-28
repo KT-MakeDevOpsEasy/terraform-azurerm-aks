@@ -82,13 +82,14 @@ variable "authorized_ip_ranges" {
 variable "system_node_pool" {
   description = "Configuration for the default (system) node pool"
   type = object({
-    vm_size              = optional(string, "Standard_D2s_v3")
-    node_count           = optional(number, 1)
-    min_count            = optional(number, 1)
-    max_count            = optional(number, 3)
-    auto_scaling_enabled = optional(bool, true)
-    os_disk_size_gb      = optional(number, 50)
-    zones                = optional(list(string), ["1", "2", "3"])
+    vm_size                      = optional(string, "Standard_D2s_v3")
+    node_count                   = optional(number, 1)
+    min_count                    = optional(number, 1)
+    max_count                    = optional(number, 3)
+    auto_scaling_enabled         = optional(bool, true)
+    os_disk_size_gb              = optional(number, 50)
+    zones                        = optional(list(string), ["1", "2", "3"])
+    only_critical_addons_enabled = optional(bool, false)
   })
   default = {}
 }

@@ -53,7 +53,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vnet_subnet_id               = var.node_subnet_id
     os_disk_size_gb              = var.system_node_pool.os_disk_size_gb
     zones                        = var.system_node_pool.zones
-    only_critical_addons_enabled = true
+    only_critical_addons_enabled = var.system_node_pool.only_critical_addons_enabled
 
 
     node_labels = {
