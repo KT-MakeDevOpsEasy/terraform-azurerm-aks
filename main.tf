@@ -64,6 +64,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   network_profile {
     network_plugin      = "azure"
     network_plugin_mode = var.network_plugin_mode
+    network_data_plane  = var.network_policy == "cilium" ? "cilium" : "azure"
     network_policy      = var.network_policy
     pod_cidr            = var.network_plugin_mode == "overlay" ? var.pod_cidr : null
     service_cidr        = var.service_cidr
