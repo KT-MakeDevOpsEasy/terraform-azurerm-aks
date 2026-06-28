@@ -42,15 +42,27 @@ variable "node_subnet_id" {
   type        = string
 }
 
-variable "network_policy" {
-  description = "Network policy provider: azure or calico"
+variable "network_plugin_mode" {
+  description = "Network plugin mode: overlay or empty for standard Azure CNI"
   type        = string
-  default     = "calico"
+  default     = "overlay"
+}
+
+variable "network_policy" {
+  description = "Network policy provider: azure, calico, or cilium"
+  type        = string
+  default     = "cilium"
 
   validation {
-    condition     = contains(["azure", "calico"], var.network_policy)
-    error_message = "Network policy must be azure or calico."
+    condition     = contains(["azure", "calico", "cilium"], var.network_policy)
+    error_message = "Network policy must be azure, calico, or cilium."
   }
+}
+
+variable "pod_cidr" {
+  description = "CIDR for pod network (used with overlay mode)"
+  type        = string
+  default     = "192.168.0.0/16"
 }
 
 variable "service_cidr" {

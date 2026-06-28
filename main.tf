@@ -62,11 +62,13 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   network_profile {
-    network_plugin    = "azure"
-    network_policy    = var.network_policy
-    service_cidr      = var.service_cidr
-    dns_service_ip    = var.dns_service_ip
-    load_balancer_sku = "standard"
+    network_plugin      = "azure"
+    network_plugin_mode = var.network_plugin_mode
+    network_policy      = var.network_policy
+    pod_cidr            = var.network_plugin_mode == "overlay" ? var.pod_cidr : null
+    service_cidr        = var.service_cidr
+    dns_service_ip      = var.dns_service_ip
+    load_balancer_sku   = "standard"
   }
 
   azure_active_directory_role_based_access_control {
