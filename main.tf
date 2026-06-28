@@ -44,15 +44,16 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   default_node_pool {
     name                         = "system"
+    temporary_name_for_rotation  = "systemtmp"
     vm_size                      = var.system_node_pool.vm_size
     node_count                   = var.system_node_pool.auto_scaling_enabled ? null : var.system_node_pool.node_count
     min_count                    = var.system_node_pool.auto_scaling_enabled ? var.system_node_pool.min_count : null
     max_count                    = var.system_node_pool.auto_scaling_enabled ? var.system_node_pool.max_count : null
-    auto_scaling_enabled          = var.system_node_pool.auto_scaling_enabled
+    auto_scaling_enabled         = var.system_node_pool.auto_scaling_enabled
     vnet_subnet_id               = var.node_subnet_id
     os_disk_size_gb              = var.system_node_pool.os_disk_size_gb
     zones                        = var.system_node_pool.zones
-    critical_addons_only_enabled = true
+    only_critical_addons_enabled = true
 
     node_labels = {
       "nodepool-type" = "system"
